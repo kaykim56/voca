@@ -141,7 +141,26 @@ export const useRainGame = (settings: RainGameSettings) => {
         const pointsEarned = Math.floor((100 - matchedWord.y) * prev.level); // 높이에 따른 점수
 
         const newWordsCompleted = prev.wordsCompleted + 1;
-        const newLevel = Math.floor(newWordsCompleted / 10) + 1; // 10개마다 레벨업
+        
+        // 레벨별 필요 단어 수 계산
+        const getRequiredWordsForLevel = (level: number): number => {
+          if (level === 1) return 5; // Level 1: 5개
+          return 5 + (level - 1) * 7; // Level 2부터: 5 + 7 + 7 + ... (누적)
+        };
+        
+        // 현재 레벨 계산
+        let newLevel = 1;
+        let totalRequired = 0;
+        while (totalRequired < newWordsCompleted) {
+          totalRequired = getRequiredWordsForLevel(newLevel);
+          if (newWordsCompleted >= totalRequired) {
+            newLevel++;
+          } else {
+            break;
+          }
+        }
+        newLevel--; // 마지막에 1 증가한 것 보정
+        
         const newGameSpeed = 1 + (newLevel - 1) * 0.3; // 레벨당 30% 속도 증가
         
         // 레벨업 감지

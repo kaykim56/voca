@@ -13,6 +13,23 @@ export default function RainGameUI({ gameState }: RainGameUIProps) {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // 현재 레벨에서 필요한 단어 수 계산
+  const getWordsNeededForCurrentLevel = () => {
+    if (gameState.level === 1) return 5;
+    return 7; // Level 2부터는 7개씩
+  };
+
+  // 현재 레벨에서의 진행도 계산
+  const getCurrentLevelProgress = () => {
+    if (gameState.level === 1) {
+      return gameState.wordsCompleted; // 0~5
+    } else {
+      // Level 2부터는 이전 레벨들의 총합을 빼고 현재 레벨 진행도만 계산
+      const previousLevelsTotal = 5 + (gameState.level - 2) * 7;
+      return gameState.wordsCompleted - previousLevelsTotal; // 0~7
+    }
+  };
+
   return (
     <div className="absolute top-4 left-4 right-4 z-10">
       <div className="flex justify-between items-start">
@@ -30,6 +47,12 @@ export default function RainGameUI({ gameState }: RainGameUIProps) {
             <div className="flex items-center gap-2">
               <span className="text-blue-400">📊</span>
               <span className="font-bold">Lv.{gameState.level}</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-purple-400">🎯</span>
+              <span className="font-bold">
+                {getCurrentLevelProgress()}/{getWordsNeededForCurrentLevel()}
+              </span>
             </div>
           </div>
         </div>
@@ -59,12 +82,7 @@ export default function RainGameUI({ gameState }: RainGameUIProps) {
         </div>
       </div>
 
-      {/* 레벨업 알림 */}
-      {gameState.level > 1 && gameState.wordsCompleted % 10 === 0 && gameState.wordsCompleted > 0 && (
-        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-6 py-2 rounded-full font-bold animate-bounce">
-          🎉 레벨 {gameState.level}! 🎉
-        </div>
-      )}
+      {/* 레벨업 알림은 LevelUpEffect 컴포넌트에서 처리 */}
 
       {/* 게임 오버 또는 일시정지 오버레이 */}
       {(gameState.isGameOver || gameState.isPaused) && (
