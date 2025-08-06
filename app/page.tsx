@@ -142,13 +142,18 @@ export default function Home() {
 
           {/* 푸터 링크 */}
           <div className="mt-12 pt-8 border-t border-gray-600/50">
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
-              <a href="/about" className="hover:text-blue-400 transition-colors">게임 소개</a>
-              <a href="/privacy" className="hover:text-blue-400 transition-colors">개인정보처리방침</a>
-              <a href="/terms" className="hover:text-blue-400 transition-colors">이용약관</a>
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400 mb-4">
+              <a href="/guides" className="hover:text-blue-400 transition-colors">📚 학습 가이드</a>
+              <a href="/tips" className="hover:text-blue-400 transition-colors">💡 학습 팁</a>
+              <a href="/vocabulary" className="hover:text-blue-400 transition-colors">📖 영단어 사전</a>
+              <a href="/about" className="hover:text-blue-400 transition-colors">ℹ️ 게임 소개</a>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4 text-xs text-gray-500">
+              <a href="/privacy" className="hover:text-gray-300 transition-colors">개인정보처리방침</a>
+              <a href="/terms" className="hover:text-gray-300 transition-colors">이용약관</a>
             </div>
             <div className="text-center mt-4 text-xs text-gray-500">
-              © 2025 VOCA Rain. All rights reserved.
+              © 2025 VOCA Rain. All rights reserved. | 영어 학습의 새로운 경험
             </div>
           </div>
         </div>
