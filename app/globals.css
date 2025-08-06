@@ -24,3 +24,113 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 떠다니는 단어 애니메이션 */
+@keyframes float-1 {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float-2 {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(-360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float-3 {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float-4 {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(-180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float-5 {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(270deg);
+    opacity: 0;
+  }
+}
+
+.animate-float-1 {
+  animation: float-1 15s infinite linear;
+}
+
+.animate-float-2 {
+  animation: float-2 15s infinite linear;
+}
+
+.animate-float-3 {
+  animation: float-3 15s infinite linear;
+}
+
+.animate-float-4 {
+  animation: float-4 15s infinite linear;
+}
+
+.animate-float-5 {
+  animation: float-5 15s infinite linear;
+}
+
+.text-shadow-lg {
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
