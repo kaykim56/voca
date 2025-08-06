@@ -1,5 +1,5 @@
 export async function GET() {
-  const baseUrl = 'https://voca-3jo77t9o0-kaykim56s-projects.vercel.app';
+  const baseUrl = 'https://voca-h68sqqfr1-kaykim56s-projects.vercel.app';
   
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

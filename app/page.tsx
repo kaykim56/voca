@@ -54,7 +54,7 @@ export default function Home() {
   }, [appState]);
 
   if (appState === 'menu') {
-    return (
+  return (
       <div className="min-h-screen relative overflow-x-hidden">
         {/* 그라데이션 배경 */}
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-700 to-indigo-800"></div>
@@ -85,7 +85,7 @@ export default function Home() {
                 <span className="text-5xl font-black bg-gradient-to-r from-red-400 via-yellow-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-pulse" style={{animationDelay: '0.9s'}}>Y</span>
               </div>
             </div>
-            <h1 className="text-6xl font-black text-white mb-4 text-shadow-lg bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">영단어 비 게임</h1>
+            <h1 className="text-6xl font-black text-white mb-4 text-shadow-lg bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">Rain VOCA</h1>
             <p className="text-xl text-white/90 mb-3 font-light">하늘에서 떨어지는 영단어를 빠르게 타이핑하세요!</p>
             <p className="text-lg text-white/70 font-light">단어가 땅에 떨어지기 전에 입력해야 합니다!</p>
           </div>
@@ -227,7 +227,7 @@ export default function Home() {
               <a href="/terms" className="hover:text-gray-300 transition-colors">이용약관</a>
             </div>
             <div className="text-center mt-4 text-xs text-white/40">
-              © 2025 VOCA Rain. All rights reserved. | 영어 학습의 새로운 경험
+              © 2025 Rain VOCA. All rights reserved. | 영어 학습의 새로운 경험
             </div>
           </div>
         </div>

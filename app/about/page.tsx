@@ -2,12 +2,12 @@ export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-green-900 p-8">
       <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-sm rounded-xl p-8">
-        <h1 className="text-3xl font-bold text-white mb-6">VOCA Rain 소개</h1>
+        <h1 className="text-3xl font-bold text-white mb-6">Rain VOCA 소개</h1>
         
         <div className="text-gray-200 space-y-6">
           <section>
             <h2 className="text-xl font-semibold text-blue-300 mb-3">🌧️ 게임 소개</h2>
-            <p>VOCA Rain은 하늘에서 비처럼 떨어지는 영단어를 빠르게 타이핑하여 제거하는 교육용 게임입니다. 
+            <p>Rain VOCA는 하늘에서 비처럼 떨어지는 영단어를 빠르게 타이핑하여 제거하는 교육용 게임입니다. 
             재미있는 게임을 통해 자연스럽게 영어 단어를 학습할 수 있습니다.</p>
           </section>
 

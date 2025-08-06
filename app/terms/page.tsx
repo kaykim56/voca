@@ -7,7 +7,7 @@ export default function Terms() {
         <div className="text-gray-200 space-y-6">
           <section>
             <h2 className="text-xl font-semibold text-blue-300 mb-3">1. 서비스 이용</h2>
-            <p>VOCA Rain은 무료로 제공되는 영단어 학습 게임입니다. 사용자는 별도의 회원가입 없이 게임을 이용할 수 있습니다.</p>
+            <p>Rain VOCA는 무료로 제공되는 영단어 학습 게임입니다. 사용자는 별도의 회원가입 없이 게임을 이용할 수 있습니다.</p>
           </section>
 
           <section>

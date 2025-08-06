@@ -7,7 +7,7 @@ export default function Privacy() {
         <div className="text-gray-200 space-y-6">
           <section>
             <h2 className="text-xl font-semibold text-blue-300 mb-3">1. 개인정보의 처리 목적</h2>
-            <p>VOCA Rain은 다음의 목적을 위하여 개인정보를 처리합니다:</p>
+            <p>Rain VOCA는 다음의 목적을 위하여 개인정보를 처리합니다:</p>
             <ul className="list-disc ml-6 mt-2">
               <li>게임 서비스 제공</li>
               <li>광고 서비스 제공 (Google AdSense)</li>

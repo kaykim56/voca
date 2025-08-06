@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://voca-3jo77t9o0-kaykim56s-projects.vercel.app/sitemap.xml
+Sitemap: https://voca-h68sqqfr1-kaykim56s-projects.vercel.app/sitemap.xml
