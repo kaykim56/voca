@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://voca-eqj43tf16-kaykim56s-projects.vercel.app/sitemap.xml

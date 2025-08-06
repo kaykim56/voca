@@ -15,6 +15,25 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "VOCA Rain - 영단어 타이핑 게임",
   description: "비 내리듯 떨어지는 영단어를 타이핑하는 재미있는 게임! 5단계 난이도로 초보자부터 전문가까지 즐길 수 있습니다.",
+  keywords: "영단어, 타이핑 게임, 영어 학습, 교육 게임, 무료 게임, VOCA, 단어 암기",
+  authors: [{ name: "Kay Kim" }],
+  creator: "Kay Kim",
+  publisher: "VOCA Rain",
+  robots: "index, follow",
+  openGraph: {
+    title: "VOCA Rain - 영단어 타이핑 게임",
+    description: "비 내리듯 떨어지는 영단어를 타이핑하는 재미있는 게임!",
+    url: "https://voca-eqj43tf16-kaykim56s-projects.vercel.app",
+    siteName: "VOCA Rain",
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VOCA Rain - 영단어 타이핑 게임",
+    description: "비 내리듯 떨어지는 영단어를 타이핑하는 재미있는 게임!",
+  },
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({
@@ -29,6 +48,20 @@ export default function RootLayout({
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4337637294815525"
           crossOrigin="anonymous"
+        />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXXXXX');
+            `,
+          }}
         />
       </head>
       <body

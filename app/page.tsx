@@ -139,6 +139,18 @@ export default function Home() {
               />
             </div>
           </div>
+
+          {/* 푸터 링크 */}
+          <div className="mt-12 pt-8 border-t border-gray-600/50">
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+              <a href="/about" className="hover:text-blue-400 transition-colors">게임 소개</a>
+              <a href="/privacy" className="hover:text-blue-400 transition-colors">개인정보처리방침</a>
+              <a href="/terms" className="hover:text-blue-400 transition-colors">이용약관</a>
+            </div>
+            <div className="text-center mt-4 text-xs text-gray-500">
+              © 2025 VOCA Rain. All rights reserved.
+            </div>
+          </div>
         </div>
       </div>
     );
