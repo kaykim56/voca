@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import AdSense from './AdSense';
 
 interface GameOverEffectProps {
   isVisible: boolean;
@@ -73,6 +74,18 @@ const GameOverEffect: React.FC<GameOverEffectProps> = ({ isVisible, onRestart, o
             오늘도 수고하셨습니다
           </div>
           
+          {/* AdSense 광고 */}
+          <div className="mb-6 flex justify-center">
+            <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-gray-500/30">
+              <AdSense 
+                adSlot="0987654321"
+                adFormat="auto"
+                style={{ display: 'block', minHeight: '90px', minWidth: '300px' }}
+                className="mx-auto"
+              />
+            </div>
+          </div>
+
           {/* 게임 오버 액션 버튼들 */}
           <div className="flex gap-4 justify-center">
             <button

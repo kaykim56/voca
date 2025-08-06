@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import RainTypingGame from '@/components/RainTypingGame';
+import AdSense from '@/components/AdSense';
 
 type AppState = 'menu' | 'playing';
 
@@ -124,6 +125,18 @@ export default function Home() {
                   <li>• 레벨업시 속도 증가</li>
                 </ul>
               </div>
+            </div>
+          </div>
+
+          {/* AdSense 배너 광고 */}
+          <div className="mt-8 flex justify-center">
+            <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-4 border border-gray-600/50">
+              <AdSense 
+                adSlot="1234567890"
+                adFormat="auto"
+                style={{ display: 'block', minHeight: '100px', minWidth: '300px' }}
+                className="mx-auto"
+              />
             </div>
           </div>
         </div>

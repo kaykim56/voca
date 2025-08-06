@@ -10,6 +10,7 @@ import MeaningEffect from './MeaningEffect';
 import LifeGauge from './LifeGauge';
 import LevelUpEffect from './LevelUpEffect';
 import GameOverEffect from './GameOverEffect';
+import AdSense from './AdSense';
 
 interface RainTypingGameProps {
   onBackToMenu: () => void;
@@ -153,9 +154,21 @@ export default function RainTypingGame({ onBackToMenu, difficultyLevel }: RainTy
       {/* UI 오버레이 */}
       <RainGameUI gameState={gameState} />
 
+      {/* 게임 중 사이드바 광고 */}
+      <div className="absolute top-4 right-4 z-30">
+        <div className="bg-black/40 backdrop-blur-sm rounded-lg p-2 border border-gray-500/30 max-w-xs">
+          <AdSense 
+            adSlot="1357924680"
+            adFormat="auto"
+            style={{ display: 'block', minHeight: '60px', minWidth: '200px' }}
+            className="mx-auto"
+          />
+        </div>
+      </div>
+
       {/* ESC로 일시정지했을 때만 메뉴 돌아가기 버튼 */}
       {gameState.isPaused && !gameState.isGameOver && (
-        <div className="absolute top-4 right-4 z-40">
+        <div className="absolute top-20 right-4 z-40">
           <button
             onClick={onBackToMenu}
             className="px-4 py-2 bg-sky-500/80 hover:bg-sky-600/90 text-white font-semibold rounded-lg transition-all duration-200 backdrop-blur-sm border border-sky-400/50 transform hover:scale-105 shadow-lg"
