@@ -47,27 +47,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head />
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <head>
         {/* AdSense Script */}
-        <Script
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4337637294815525"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
         
         {/* Google Analytics */}
-        <Script
+        <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-          strategy="afterInteractive"
         />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -77,7 +70,10 @@ export default function RootLayout({
             `,
           }}
         />
-        
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {children}
       </body>
     </html>
