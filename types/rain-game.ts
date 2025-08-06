@@ -43,6 +43,7 @@ export interface RainGameState {
 
 export interface RainGameSettings {
   difficulty: 'easy' | 'medium' | 'hard';
+  difficultyLevel: 1 | 2 | 3 | 4 | 5;  // 1~5단계 난이도
   initialLives: number;
   fallSpeed: number;      // 기본 떨어지는 속도
   spawnInterval: number;  // 새 단어 생성 간격 (ms)

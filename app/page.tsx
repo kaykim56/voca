@@ -7,6 +7,7 @@ type AppState = 'menu' | 'playing';
 
 export default function Home() {
   const [appState, setAppState] = useState<AppState>('menu');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<1 | 2 | 3 | 4 | 5>(1);
 
   const handleStartGame = () => {
     setAppState('playing');
@@ -14,6 +15,17 @@ export default function Home() {
 
   const handleBackToMenu = () => {
     setAppState('menu');
+  };
+
+  const getDifficultyInfo = (level: number) => {
+    switch(level) {
+      case 1: return { name: '초보자', color: 'text-green-400', desc: '천천히 배우기' };
+      case 2: return { name: '기초', color: 'text-blue-400', desc: '기본기 다지기' };
+      case 3: return { name: '중급', color: 'text-yellow-400', desc: '실력 향상' };
+      case 4: return { name: '고급', color: 'text-orange-400', desc: '도전적인 플레이' };
+      case 5: return { name: '전문가', color: 'text-red-400', desc: '최고 난이도' };
+      default: return { name: '초보자', color: 'text-green-400', desc: '천천히 배우기' };
+    }
   };
 
   if (appState === 'menu') {
@@ -54,6 +66,36 @@ export default function Home() {
             </div>
           </div>
 
+          {/* 난이도 선택 */}
+          <div className="mb-8 bg-gray-800/50 backdrop-blur-sm rounded-xl p-6">
+            <h3 className="text-xl font-semibold text-white mb-6">🎯 난이도 선택</h3>
+            <div className="grid grid-cols-5 gap-3 mb-4">
+              {[1, 2, 3, 4, 5].map((level) => {
+                const info = getDifficultyInfo(level);
+                return (
+                  <button
+                    key={level}
+                    onClick={() => setSelectedDifficulty(level as 1 | 2 | 3 | 4 | 5)}
+                    className={`p-4 rounded-xl border-2 transition-all duration-200 transform hover:scale-105 ${
+                      selectedDifficulty === level
+                        ? 'border-white bg-white/20 scale-105'
+                        : 'border-gray-600 bg-gray-700/30 hover:border-gray-400'
+                    }`}
+                  >
+                    <div className="text-2xl font-bold text-white mb-1">{level}</div>
+                    <div className={`text-sm font-semibold ${info.color} mb-1`}>{info.name}</div>
+                    <div className="text-xs text-gray-300">{info.desc}</div>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="text-center">
+              <div className={`text-lg font-semibold ${getDifficultyInfo(selectedDifficulty).color}`}>
+                선택된 난이도: {selectedDifficulty}단계 ({getDifficultyInfo(selectedDifficulty).name})
+              </div>
+            </div>
+          </div>
+
           {/* 시작 버튼 */}
           <button
             onClick={handleStartGame}
@@ -90,7 +132,7 @@ export default function Home() {
   }
 
   if (appState === 'playing') {
-    return <RainTypingGame onBackToMenu={handleBackToMenu} />;
+    return <RainTypingGame onBackToMenu={handleBackToMenu} difficultyLevel={selectedDifficulty} />;
   }
 
   // 폴백

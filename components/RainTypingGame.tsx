@@ -13,14 +13,16 @@ import GameOverEffect from './GameOverEffect';
 
 interface RainTypingGameProps {
   onBackToMenu: () => void;
+  difficultyLevel: 1 | 2 | 3 | 4 | 5;
 }
 
-export default function RainTypingGame({ onBackToMenu }: RainTypingGameProps) {
+export default function RainTypingGame({ onBackToMenu, difficultyLevel }: RainTypingGameProps) {
   const [settings] = useState<RainGameSettings>({
-    difficulty: 'easy',
-    initialLives: 10, // 생명력 10개로 변경
-    fallSpeed: 1,
-    spawnInterval: 3000,
+    difficulty: difficultyLevel <= 2 ? 'easy' : difficultyLevel <= 4 ? 'medium' : 'hard',
+    difficultyLevel: difficultyLevel,
+    initialLives: Math.max(5, 15 - difficultyLevel * 2), // 난이도별 생명력 (13,11,9,7,5)
+    fallSpeed: 0.5 + (difficultyLevel * 0.3), // 난이도별 속도
+    spawnInterval: Math.max(1500, 4000 - difficultyLevel * 500), // 난이도별 생성 간격
     wordLength: 'mixed',
   });
 
@@ -151,6 +153,16 @@ export default function RainTypingGame({ onBackToMenu }: RainTypingGameProps) {
       {/* UI 오버레이 */}
       <RainGameUI gameState={gameState} />
 
+      {/* 게임 중 메뉴 돌아가기 버튼 */}
+      <div className="absolute top-4 right-4 z-40">
+        <button
+          onClick={onBackToMenu}
+          className="px-4 py-2 bg-red-600/80 hover:bg-red-700/90 text-white font-semibold rounded-lg transition-all duration-200 backdrop-blur-sm border border-red-500/50 transform hover:scale-105"
+        >
+          🏠 메뉴로
+        </button>
+      </div>
+
       {/* 떨어지는 단어들 */}
       <div className="absolute inset-0">
         {gameState.fallingWords.map(word => (
@@ -158,6 +170,7 @@ export default function RainTypingGame({ onBackToMenu }: RainTypingGameProps) {
             key={word.id}
             word={word}
             isHighlighted={highlightedWord?.id === word.id}
+            gameLevel={gameState.level}
           />
         ))}
       </div>
@@ -199,7 +212,7 @@ export default function RainTypingGame({ onBackToMenu }: RainTypingGameProps) {
         <div className="bg-black/70 backdrop-blur-sm rounded-lg p-3">
           <LifeGauge 
             currentLives={gameState.lives}
-            maxLives={10}
+            maxLives={settings.initialLives}
           />
         </div>
       </div>
