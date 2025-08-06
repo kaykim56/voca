@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import AdSense from './AdSense';
 
 interface LevelUpEffectProps {
   level: number;
@@ -83,8 +84,20 @@ const LevelUpEffect: React.FC<LevelUpEffectProps> = ({ level, isVisible }) => {
           </div>
           
           {/* 축하 메시지 */}
-          <div className="text-xl text-gray-200 drop-shadow-md">
+          <div className="text-xl text-gray-200 drop-shadow-md mb-6">
             축하합니다! 다음 단계로 진입합니다!
+          </div>
+          
+          {/* AdSense 가로형 배너 광고 */}
+          <div className="flex justify-center">
+            <div className="bg-black/40 backdrop-blur-sm rounded-lg p-2 border border-gray-500/30 max-w-2xl w-full">
+              <AdSense 
+                adSlot="1122334455"
+                adFormat="banner"
+                style={{ display: 'block', width: '100%', height: '90px' }}
+                className="mx-auto"
+              />
+            </div>
           </div>
         </div>
         

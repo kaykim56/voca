@@ -154,8 +154,8 @@ export default function RainTypingGame({ onBackToMenu, difficultyLevel }: RainTy
       {/* UI 오버레이 */}
       <RainGameUI gameState={gameState} />
 
-      {/* 게임 중 사이드바 광고 */}
-      <div className="absolute top-4 right-4 z-30">
+      {/* 게임 중 우측 하단 광고 (UI 방해 안되는 위치) */}
+      <div className="absolute bottom-4 right-4 z-30">
         <div className="bg-black/40 backdrop-blur-sm rounded-lg p-2 border border-gray-500/30 max-w-xs">
           <AdSense 
             adSlot="1357924680"
@@ -165,18 +165,6 @@ export default function RainTypingGame({ onBackToMenu, difficultyLevel }: RainTy
           />
         </div>
       </div>
-
-      {/* ESC로 일시정지했을 때만 메뉴 돌아가기 버튼 */}
-      {gameState.isPaused && !gameState.isGameOver && (
-        <div className="absolute top-20 right-4 z-40">
-          <button
-            onClick={onBackToMenu}
-            className="px-4 py-2 bg-sky-500/80 hover:bg-sky-600/90 text-white font-semibold rounded-lg transition-all duration-200 backdrop-blur-sm border border-sky-400/50 transform hover:scale-105 shadow-lg"
-          >
-            🏠 메뉴로
-          </button>
-        </div>
-      )}
 
       {/* 떨어지는 단어들 */}
       <div className="absolute inset-0">
@@ -232,14 +220,20 @@ export default function RainTypingGame({ onBackToMenu, difficultyLevel }: RainTy
         </div>
       </div>
 
-      {/* 일시정지 시 재개 버튼 */}
+      {/* 일시정지 시 버튼들 */}
       {gameState.isPaused && !gameState.isGameOver && (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col gap-3 items-center">
           <button
             onClick={togglePause}
             className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-colors duration-200 shadow-lg"
           >
             ▶️ 게임 재개
+          </button>
+          <button
+            onClick={onBackToMenu}
+            className="px-6 py-2 bg-sky-500/80 hover:bg-sky-600/90 text-white font-semibold rounded-lg transition-all duration-200 backdrop-blur-sm border border-sky-400/50 transform hover:scale-105 shadow-lg"
+          >
+            🏠 메뉴로
           </button>
         </div>
       )}
@@ -255,6 +249,16 @@ export default function RainTypingGame({ onBackToMenu, difficultyLevel }: RainTy
         isVisible={gameState.isGameOver}
         onRestart={resetGame}
         onBackToMenu={onBackToMenu}
+        gameStats={{
+          score: gameState.score,
+          level: gameState.level,
+          correctWords: gameState.wordsCompleted,
+          accuracy: Math.round(
+            gameState.wordsCompleted + gameState.wordsDropped > 0 
+              ? (gameState.wordsCompleted / (gameState.wordsCompleted + gameState.wordsDropped)) * 100 
+              : 0
+          )
+        }}
       />
     </div>
   );

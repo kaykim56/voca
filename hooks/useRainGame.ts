@@ -27,6 +27,7 @@ const initialState: RainGameState = {
   meaningEffects: [], // 한글 뜻 이펙트들
   showLevelUp: false, // 레벨업 표시
   levelUpEndTime: null, // 레벨업 종료 시간
+
 };
 
 export const useRainGame = (settings: RainGameSettings) => {
@@ -35,34 +36,43 @@ export const useRainGame = (settings: RainGameSettings) => {
   const spawnRef = useRef<NodeJS.Timeout | null>(null);
   const gameTimeRef = useRef<NodeJS.Timeout | null>(null);
 
-  // 랜덤 위치 생성
-  const getRandomX = () => Math.random() * 80 + 10; // 10% ~ 90% 범위
+  // 랜덤 위치 생성 (우측 광고 영역 피하기)
+  const getRandomX = () => Math.random() * 70 + 10; // 10% ~ 80% 범위 (우측 20% 광고 영역 제외)
 
-  // 새 단어 생성
+  // 새 단어 생성 (간단한 중복 방지)
   const spawnWord = useCallback(() => {
-    // 레벨업 중에는 새 단어 생성 안함
-    if (gameState.showLevelUp) return;
-    
-    const words = getRandomWords(1, settings.difficulty);
-    if (words.length === 0) return;
+    setGameState(prev => {
+      // 게임이 일시정지되었거나 레벨업 중에는 새 단어 생성 안함
+      if (prev.isPaused || prev.showLevelUp || !prev.isPlaying) return prev;
+      
+      const words = getRandomWords(1, settings.difficulty);
+      if (words.length === 0) return prev;
 
-    const word = words[0];
-    const newWord: FallingWord = {
-      id: `word-${Date.now()}-${Math.random()}`,
-      word: word.word,
-      meaning: word.meaning,
-      x: getRandomX(),
-      y: 0,
-      speed: settings.fallSpeed * gameState.gameSpeed,
-      isActive: true,
-      color: GAME_COLORS[Math.floor(Math.random() * GAME_COLORS.length)],
-    };
+      const word = words[0];
+      
+      // 현재 화면에 떨어지고 있는 같은 단어가 있는지 확인
+      const isCurrentlyFalling = prev.fallingWords.some(fw => fw.word.toLowerCase() === word.word.toLowerCase());
+      
+      // 이미 떨어지고 있는 단어면 스킵
+      if (isCurrentlyFalling) return prev;
 
-    setGameState(prev => ({
-      ...prev,
-      fallingWords: [...prev.fallingWords, newWord],
-    }));
-  }, [settings.difficulty, settings.fallSpeed, gameState.gameSpeed, gameState.showLevelUp]);
+      const newWord: FallingWord = {
+        id: `word-${Date.now()}-${Math.random()}`,
+        word: word.word,
+        meaning: word.meaning,
+        x: getRandomX(),
+        y: 0,
+        speed: settings.fallSpeed * prev.gameSpeed,
+        isActive: true,
+        color: GAME_COLORS[Math.floor(Math.random() * GAME_COLORS.length)],
+      };
+
+      return {
+        ...prev,
+        fallingWords: [...prev.fallingWords, newWord],
+      };
+    });
+  }, [settings.difficulty, settings.fallSpeed]);
 
   // 게임 루프 (단어들이 떨어지는 애니메이션)
   const gameLoop = useCallback(() => {
@@ -142,7 +152,7 @@ export const useRainGame = (settings: RainGameSettings) => {
 
         const newWordsCompleted = prev.wordsCompleted + 1;
         
-        // 레벨별 필요 단어 수 계산
+        // 레벨별 필요 단어 수 계산 (누적)
         const getRequiredWordsForLevel = (level: number): number => {
           if (level === 1) return 5; // Level 1: 5개
           return 5 + (level - 1) * 7; // Level 2부터: 5 + 7 + 7 + ... (누적)
@@ -150,10 +160,9 @@ export const useRainGame = (settings: RainGameSettings) => {
         
         // 현재 레벨 계산
         let newLevel = 1;
-        let totalRequired = 0;
-        while (totalRequired < newWordsCompleted) {
-          totalRequired = getRequiredWordsForLevel(newLevel);
-          if (newWordsCompleted >= totalRequired) {
+        while (newLevel <= 10) { // 최대 레벨 10으로 제한
+          const requiredForThisLevel = getRequiredWordsForLevel(newLevel);
+          if (newWordsCompleted >= requiredForThisLevel) {
             newLevel++;
           } else {
             break;
@@ -272,11 +281,15 @@ export const useRainGame = (settings: RainGameSettings) => {
 
   // 스폰 속도 업데이트
   useEffect(() => {
-    if (spawnRef.current && gameState.isPlaying) {
+    if (spawnRef.current) {
       clearInterval(spawnRef.current);
+    }
+    
+    // 게임이 실행 중이고 일시정지되지 않았을 때만 스폰 인터벌 시작
+    if (gameState.isPlaying && !gameState.isPaused && !gameState.showLevelUp) {
       spawnRef.current = setInterval(spawnWord, gameState.spawnRate);
     }
-  }, [gameState.spawnRate, gameState.isPlaying, spawnWord]);
+  }, [gameState.spawnRate, gameState.isPlaying, gameState.isPaused, gameState.showLevelUp, spawnWord]);
 
   // 컴포넌트 언마운트 시 정리
   useEffect(() => {

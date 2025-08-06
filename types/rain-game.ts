@@ -39,6 +39,7 @@ export interface RainGameState {
   meaningEffects: MeaningEffect[];  // 한글 뜻 이펙트들
   showLevelUp: boolean;   // 레벨업 표시 여부
   levelUpEndTime: number | null; // 레벨업 표시 종료 시간
+
 }
 
 export interface RainGameSettings {

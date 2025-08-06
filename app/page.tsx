@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react';
 import RainTypingGame from '@/components/RainTypingGame';
 import AdSense from '@/components/AdSense';
+import { getHighScore, formatScore } from '@/utils/scoreUtils';
 
 type AppState = 'menu' | 'playing';
 
 export default function Home() {
   const [appState, setAppState] = useState<AppState>('menu');
   const [selectedDifficulty, setSelectedDifficulty] = useState<1 | 2 | 3 | 4 | 5>(1);
+  const [highScore, setHighScore] = useState<number>(0);
 
   const handleStartGame = () => {
     setAppState('playing');
@@ -16,7 +18,14 @@ export default function Home() {
 
   const handleBackToMenu = () => {
     setAppState('menu');
+    // 메뉴로 돌아올 때 최고 점수 업데이트
+    setHighScore(getHighScore());
   };
+
+  // 컴포넌트 마운트 시 최고 점수 로드
+  useEffect(() => {
+    setHighScore(getHighScore());
+  }, []);
 
   const getDifficultyInfo = (level: number) => {
     switch(level) {
@@ -87,7 +96,17 @@ export default function Home() {
             </div>
             <h1 className="text-6xl font-black text-white mb-4 text-shadow-lg bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">Rain VOCA</h1>
             <p className="text-xl text-white/90 mb-3 font-light">하늘에서 떨어지는 영단어를 빠르게 타이핑하세요!</p>
-            <p className="text-lg text-white/70 font-light">단어가 땅에 떨어지기 전에 입력해야 합니다!</p>
+            <p className="text-lg text-white/70 font-light mb-4">단어가 땅에 떨어지기 전에 입력해야 합니다!</p>
+            
+            {/* 최고 점수 표시 */}
+            {highScore > 0 && (
+              <div className="bg-black/20 backdrop-blur-sm rounded-xl px-6 py-3 border border-white/20 mb-4 inline-block">
+                <div className="flex items-center gap-2 text-yellow-400">
+                  <span className="text-xl">🏆</span>
+                  <span className="text-lg font-bold">최고 점수: {formatScore(highScore)}점</span>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* 게임 모드 카드 */}

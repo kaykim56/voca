@@ -12,7 +12,7 @@ interface FallingWordProps {
 export default function FallingWord({ word, isHighlighted, gameLevel = 1 }: FallingWordProps) {
   const [isVisible, setIsVisible] = useState(true);
 
-  // 레벨 2 이상에서 깜박임 효과
+  // 레벨 2부터 깜박임 효과 (Level 2, 3, 4, 5...)
   useEffect(() => {
     if (gameLevel >= 2) {
       const blinkInterval = setInterval(() => {
