@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   creator: "Kay Kim",
   publisher: "Rain VOCA",
   robots: "index, follow",
+  verification: {
+    google: "your-google-site-verification-code"
+  },
   openGraph: {
     title: "Rain VOCA - 영단어 타이핑 게임",
     description: "비 내리듯 떨어지는 영단어를 타이핑하는 재미있는 게임!",

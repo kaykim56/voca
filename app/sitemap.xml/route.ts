@@ -10,6 +10,18 @@ export async function GET() {
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>${baseUrl}/how-to-play</loc>
+    <lastmod>2025-01-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/benefits</loc>
+    <lastmod>2025-01-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>${baseUrl}/guides</loc>
     <lastmod>2025-01-06</lastmod>
     <changefreq>weekly</changefreq>

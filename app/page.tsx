@@ -217,6 +217,8 @@ export default function Home() {
           {/* 푸터 링크 */}
           <div className="mt-12 pt-8 border-t border-white/20">
             <div className="flex flex-wrap justify-center gap-4 text-sm text-white/60 mb-4">
+              <a href="/how-to-play" className="hover:text-blue-400 transition-colors">🎮 게임 방법</a>
+              <a href="/benefits" className="hover:text-blue-400 transition-colors">🌟 학습 효과</a>
               <a href="/guides" className="hover:text-blue-400 transition-colors">📚 학습 가이드</a>
               <a href="/tips" className="hover:text-blue-400 transition-colors">💡 학습 팁</a>
               <a href="/vocabulary" className="hover:text-blue-400 transition-colors">📖 영단어 사전</a>
