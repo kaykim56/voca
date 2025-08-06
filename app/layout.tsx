@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from 'next/script';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Rain VOCA - 영단어 타이핑 게임",
     description: "비 내리듯 떨어지는 영단어를 타이핑하는 재미있는 게임!",
-    url: "https://voca-h68sqqfr1-kaykim56s-projects.vercel.app",
+    url: "https://rain-voca.vercel.app",
     siteName: "Rain VOCA",
     locale: "ko_KR",
     type: "website",
@@ -43,17 +44,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head>
-        <script
+      <head />
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {/* AdSense Script */}
+        <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4337637294815525"
           crossOrigin="anonymous"
+          strategy="afterInteractive"
         />
-        <script
+        
+        {/* Google Analytics */}
+        <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+          strategy="afterInteractive"
         />
-        <script
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -63,10 +74,7 @@ export default function RootLayout({
             `,
           }}
         />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        
         {children}
       </body>
     </html>
